@@ -1,50 +1,42 @@
-<<<<<<< HEAD
 package main
-=======
-package main 
->>>>>>> 5098bce (changes)
 
-import "fmt"
+import "github.com/01-edu/z01"
 
-func CamelToSnakeCase(s string) string {
-<<<<<<< HEAD
+// PrintNumber handles numbers greater than 9 without using strconv
+func PrintNumber(n int) {
+	if n > 9 {
+		PrintNumber(n / 10)
+	}
+	z01.PrintRune(rune('0' + n%10))
+}
+
+func PrintRepeats(s string) {
 	if s == "" {
-		return s
+		return
 	}
-	result := ""
-	n := len(s)
+	counter := 1
 
-	last := s[n-1]
+	for i := 0; i < len(s); i++ {
+		if i+1 < len(s) && s[i] == s[i+1] {
+			counter++
+		} else {
+			// Print the character itself
+			z01.PrintRune(rune(s[i]))
 
-	for i, v := range s {
-		if last >= 'A' && last <= 'Z' {
-			return s
+			// If it repeated, print the counter digits
+			if counter > 1 {
+				PrintNumber(counter)
+			}
+			// Reset the counter for the next unique character
+			counter = 1
 		}
-		if i > 0 && !(v >= 'a' && v <= 'z') && !(v >= 'A' && v <= 'Z') {
-			return s
-		}
-		if i > 0 && (v >= 'A' && v <= 'Z') && (s[i-1] >= 'A' && s[i-1] <= 'Z') {
-			return s
-		}
-		if i>0 && v >= 'A' && v <= 'Z' {
-			result += "_"
-		}
-		result= result + string(v)
 	}
-	return result
+	// Print a newline at the end of the string run
+	z01.PrintRune('\n')
 }
 
 func main() {
-	fmt.Println(CamelToSnakeCase("CamelCase"))
+	PrintRepeats("aaabbbccc") // Prints: a3b3c3
+	PrintRepeats("abc")       // Prints: abc
+	PrintRepeats("abbccc")    // Prints: ab2c3
 }
-=======
-	result:= ""
-	n :=len(s)
-
-	if s == "" {
-		return s
-	}
-	
-	for i,v := range s
-}
->>>>>>> 5098bce (changes)
